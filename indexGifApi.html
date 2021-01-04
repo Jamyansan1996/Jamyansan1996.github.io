@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+    </head>
+    <body id="mybody">
+        <input type="text" placeholder="GIF" id="myinput">
+        <button onclick="getDATA()" id="mybutton">Search</button>
+        <div id="mydivcontainer" class="container">
+
+        </div>
+        <style>
+            img{
+                widows: 200px;
+                height: auto; 
+            }
+            body{
+                margin: 0;
+                padding: 0;
+            }
+            .container{
+                margin: 0 auto 0 auto;
+                padding: 0;
+                width: 70vw;
+                height: auto;
+                background-color:rgba(0, 0, 0, 0.6) ;
+            }
+        </style>
+        <script>
+            
+
+            let API = "https://api.giphy.com/v1/gifs/search?api_key=GL5yuz2p7N1K0bPDZHKRcqcbwmW2ejK5&q=";
+            let restAPI = "&limit=5";
+            let GifName;
+            let myinput = document.getElementById("myinput");
+            let myImg;
+            let myBody = document.getElementById("mybody");
+            let myButton = document.getElementById("mybutton"); 
+            let mydivcontainer = document.getElementById("mydivcontainer");
+            let count = 0;
+            function getDATA(){
+                count++;
+                GifName = myinput.value;
+                myinput.value = "";
+                fetch(API + GifName + restAPI).then(function(response){
+                    return response.json();
+                }).then(function(url){
+                    for(let i = 0; i < url.data.length; i++){
+                    /*myImg = document.createElement("img").src = url.data[i].images.downsized.url;*/
+                    myImg = document.createElement("img");
+                    myImg.src = url.data[i].images.downsized.url;
+                    mydivcontainer.append(myImg);
+                    
+                    
+                }
+                })
+                if(count == 2){
+                    count = 1;
+                    mydivcontainer.innerHTML = "";
+                }
+            }
+        </script>
+    </body>
+</html>
