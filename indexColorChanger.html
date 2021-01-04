@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackgroundColor changer</title>
+</head>
+<body>
+    <button onclick="changer()">Change background color</button>
+    <input type="text" class="myInput">
+    <button onclick="addColor()">Add color</button>
+    <script>
+        var myColors = ["pink","red","yellow","blue"]
+        var i = 0
+        var myInput = document.getElementsByClassName("myInput")[0]
+        function changer(){
+            document.body.style.backgroundColor = myColors[i]
+            i++
+            if (i==myColors.length) {
+                i = 0
+            }
+        }
+        function addColor(){
+            document.body.style.backgroundColor = myInput.value
+            myColors.push(myInput.value)
+            myInput.value = " "
+        }
+    </script>
+</body>
+</html>
